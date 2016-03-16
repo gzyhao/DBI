@@ -1,0 +1,5 @@
+ALTER TABLE grade
+  ADD CONSTRAINT gr_fk1
+    FOREIGN KEY (sID)
+      REFERENCES student (sID)
+      ON DELETE CASCADE;

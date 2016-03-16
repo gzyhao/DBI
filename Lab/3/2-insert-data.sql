@@ -1,12 +1,11 @@
 INSERT INTO Student
-    (sName, GPA)
     VALUES
-    ("John", 18.5),
-    ("Mary", 19),
-    ("James", 18),
-    ("Amy", 17),
-    ("John", 18.5),
-    ("Amy", 18);
+    (1, "John", 18.5),
+    (2, "Mary", 19),
+    (3, "James", 18),
+    (4, "Amy", 17),
+    (5, "John", 18.5),
+    (6, "Amy", 18);
 
 INSERT INTO Module
     VALUES
