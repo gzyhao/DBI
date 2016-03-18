@@ -1,10 +1,10 @@
-# For legacy
-DROP TABLE IF EXISTS Student;
-DROP TABLE IF EXISTS Module;
-DROP TABLE IF EXISTS Grade;
-
 # Switch to the correct database
 use db_zy15798;
+
+# For legacy
+DROP TABLE IF EXISTS Grade;
+DROP TABLE IF EXISTS Module;
+DROP TABLE IF EXISTS Student;
 
 # Create tables for Question 2
 CREATE TABLE Student
@@ -93,10 +93,10 @@ SELECT DISTINCT Student.sID, sName, GPA
         OR
         (mCode = "G51PRG" AND gMark >= 65))
         AND
-        Student.sID = GRADE.sID;
+        Student.sID = Grade.sID;
 
 # Insert a new student for Question 6
-INSERT INTO student
+INSERT INTO Student
   VALUE
   (7, "George", 20);
 
@@ -112,13 +112,18 @@ SELECT sID, sName, mCode, gMark
     GPA IS NOT NULL;
 
 # Insert a new grade for Question 8
-INSERT INTO grade
+INSERT INTO Grade
   VALUE
   (9, "G51DBI", 50);
 
-# Make a quesry for Question 9
+# Make a query for Question 9
 SELECT mCode, gMark, sID, sName, GPA
-  FROM Grade LEFT JOIN student
+  FROM Grade LEFT JOIN Student
+    USING (sID);
+
+#MAke a query for Question 10
+SELECT Student.sID, sName, GPA, mCode, gMark
+  FROM Grade LEFT JOIN Student
     USING (sID);
 
 # Add a foreign key to table GRADE for question 11
@@ -126,10 +131,10 @@ SELECT mCode, gMark, sID, sName, GPA
 DELETE FROM Grade
   WHERE sID = 9;
 
-ALTER TABLE grade
+ALTER TABLE Grade
   ADD CONSTRAINT gr_fk1
     FOREIGN KEY (sID)
-      REFERENCES student (sID)
+      REFERENCES Student (sID)
       ON DELETE CASCADE;
 
 # Make a query for Question 12
@@ -144,5 +149,5 @@ SELECT mCode, MAX(gMark) AS Max, MIN(gMark) AS Min, AVG(gMark) AS Average
 
 # Make a query for Question 13
 SELECT gMark AS Mark, COUNT(gMark) AS Count
-  FROM grade
+  FROM Grade
   GROUP BY gMark;
